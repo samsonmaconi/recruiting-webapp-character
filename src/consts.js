@@ -55,3 +55,14 @@ export const SKILL_LIST = [
     { name: 'Survival', attributeModifier: 'Wisdom' },
 
 ]
+
+export const STRING_CONSTANTS = {
+    Attributes: "Attributes",
+    Classes: "Classes",
+    MinClassRequirements: "Minimum {0} Class Requirements",
+    Modifier: "Modifier",
+    Roll: "Roll",
+    Skill: "Skill",
+    SkillCheck: "Skill Check",
+    Skills: "Skills"
+}
