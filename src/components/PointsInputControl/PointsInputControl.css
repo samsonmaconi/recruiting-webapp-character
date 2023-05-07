@@ -1,0 +1,8 @@
+.PointsInputControl {
+  display: flex;
+  align-items: center;
+}
+
+.Mui-disabled {
+  color: rgba(228, 228, 228, 0.771) !important;
+}

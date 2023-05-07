@@ -5,6 +5,7 @@ import CharacterCard from './components/CharacterCard/CharacterCard';
 
 
 function App() {
+  const [num, setNum] = useState(0);
   return (
     <div className="App">
       <header className="App-header">

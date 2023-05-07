@@ -66,3 +66,5 @@ export const STRING_CONSTANTS = {
     SkillCheck: "Skill Check",
     Skills: "Skills"
 }
+
+export const DEFAULT_ATTRIBUTE_VALUE = 9;
