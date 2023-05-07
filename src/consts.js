@@ -67,4 +67,6 @@ export const STRING_CONSTANTS = {
     Skills: "Skills"
 }
 
-export const DEFAULT_ATTRIBUTE_VALUE = 9;
+export const DEFAULT_ATTRIBUTE_VALUE = 10;
+export const ABILITY_MODIFIER_POINTS_BASE = 10;
+export const ABILITY_MODIFIER_POINTS_COUNT = 2;
