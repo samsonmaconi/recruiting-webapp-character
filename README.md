@@ -1,6 +1,19 @@
 # recruiting-webapp-character
 React coding test
 
+
+  ## Notes 
+  - I was able to complete requirements 1 - 5 within the 2 hour window, with considerations for the other Requirements in mind.
+  - Spent time planning and sketching out what I wanted my UI to look like within the time frame so I can have a better Idea of what my components structure could be like
+    - Prioritised reusability and extensibility when structuring and designing the completed components
+
+  ## TODOs
+  - Requirements 6 - 10
+  - More comprehensive unit testing (only updated the App.test.js)
+  - Styling, Responsiveness
+  - Improve Accessibility
+
+
 # Create a repository from this template
 - Click on `Use this template` dropdown on this repo page.
 - select `Create a new repository`
