@@ -64,9 +64,12 @@ export const STRING_CONSTANTS = {
     Roll: "Roll",
     Skill: "Skill",
     SkillCheck: "Skill Check",
-    Skills: "Skills"
+    Skills: "Skills",
+    TotalSkillPointsAvailable: "Total Skill Points Available"
 }
 
 export const DEFAULT_ATTRIBUTE_VALUE = 10;
+export const DEFAULT_SKILL_VALUE = 0;
 export const ABILITY_MODIFIER_POINTS_BASE = 10;
 export const ABILITY_MODIFIER_POINTS_COUNT = 2;
+export const TOTAL_SKILL_POINTS_BASE = 10;

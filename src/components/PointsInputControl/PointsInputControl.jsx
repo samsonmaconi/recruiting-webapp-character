@@ -13,42 +13,53 @@ export const PointsInputControlType = {
 }
 
 const PointsInputControl = props => {
-  const { name, type, value, minValue, maxValue, onChange } = props
-  const [modifier, setModifier] = useState(0)
-  const modifierLabel = type === PointsInputControlType.Attribute ? `${STRING_CONSTANTS.Modifier}: ${modifier}` :
-    `+${modifier} ${STRING_CONSTANTS.Modifier}`
+  const { name, type, value, minValue, maxValue, modifierValue, onChange, onIncrease, onDecrease } = props
+  const [modifier, setModifier] = useState(modifierValue)
+  const isAttributeControl = type === PointsInputControlType.Attribute;
+  const modifierLabel = isAttributeControl ? `${STRING_CONSTANTS.Modifier}: ${modifier}` :
+    `${modifier > 0 ? "+" : ""}${modifier} ${STRING_CONSTANTS.Modifier}`
+
+  const totalPointsValue = isAttributeControl ? value : value + modifier;
 
   useEffect(() => {
-    computeModifier(value)
+    updateModifier(value)
   })
   
   const handleIncreaseValue = () => {
-    if (value < maxValue) {
+    if (totalPointsValue < maxValue) {
       const newValue = value + 1;
       onChange(newValue);
-      computeModifier(newValue);
+      onIncrease && onIncrease();
+      isAttributeControl && updateModifier(newValue);
     }
   }
 
   const handleDecreaseValue = () => {
-    if (value > minValue) {
+  console.log('minValue', minValue)
+  console.log('value', totalPointsValue)
+    if (totalPointsValue > minValue) {
       const newValue = value - 1;
       onChange(newValue);
-      computeModifier(newValue);
+      onDecrease && onDecrease();
+      isAttributeControl && updateModifier(newValue);
     }
   }
 
-  const computeModifier = (value) => {
+  const updateModifier = (value) => {
+    if (isAttributeControl) {
       setModifier(Math.floor((value - ABILITY_MODIFIER_POINTS_BASE) / ABILITY_MODIFIER_POINTS_COUNT))
+    } else{
+      setModifier(modifierValue)
+    }
   }
 
   return (
     <div className="PointsInputControl">{name}
-      <IconButton disabled={value <= minValue} size="small" color={"primary"} aria-label="remove points" component="label" onClick={handleDecreaseValue}>
+      <IconButton disabled={totalPointsValue <= minValue} size="small" color={"primary"} aria-label="remove points" component="label" onClick={handleDecreaseValue}>
         <RemoveCircleOutlineIcon />
       </IconButton>
-      {value}
-      <IconButton disabled={value >= maxValue} size="small" color="primary" aria-label="add points" component="label" onClick={handleIncreaseValue}>
+      { totalPointsValue }
+      <IconButton disabled={totalPointsValue >= maxValue} size="small" color="primary" aria-label="add points" component="label" onClick={handleIncreaseValue}>
         <AddCircleOutlineIcon />
       </IconButton>
       {modifier ? <Chip color="secondary" label={modifierLabel} /> : null}
@@ -57,6 +68,7 @@ const PointsInputControl = props => {
 }
 
 PointsInputControl.defaultProps = {
+  modifierValue: 0,
   minValue: 0,
   maxValue: Infinity
 }
@@ -64,9 +76,12 @@ PointsInputControl.defaultProps = {
 PointsInputControl.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.oneOf(Object.keys(PointsInputControlType)).isRequired,
+  modifierValue: PropTypes.number,
   minValue: PropTypes.number,
   maxValue: PropTypes.number,
-  onChange: PropTypes.func
+  onChange: PropTypes.func.isRequired,
+  onIncrease: PropTypes.func,
+  onDecrease: PropTypes.func
 }
 
 export default PointsInputControl

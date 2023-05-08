@@ -13,7 +13,6 @@ const AttributesCard = props => {
   const handlePointChange = (attribute, value) => {
     dispatch(updateCharacterAttributes({...attributes, [attribute]: value}))
   }
-  console.log('attributes', attributes)
 
   return (
     <div className="AttributesCard">

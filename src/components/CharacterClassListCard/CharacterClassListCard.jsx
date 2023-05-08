@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import './CharacterClassListCard.css';
 import { CLASS_LIST, STRING_CONSTANTS } from '../../consts';
-import { Chip, Dialog, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
+import { Chip, Dialog, DialogContent, DialogTitle } from '@mui/material';
 
 const CharacterClassListCard = (props) => {
   const { attributes } = props;
   const [showClassRequirements, setShowClassRequirements] = useState(false)
   const [selectedClass, setSelectedClass] = useState("Barbarian")
-
-  useEffect(() => {
-    console.log('attributes changed', attributes)
-  }, [attributes])
 
   const checkClassMinimumPointsRequirements = (ClassAttributeMinimums) => {
     return (Object.keys(attributes).filter(attribute => attributes[attribute] < ClassAttributeMinimums[attribute])).length == 0;

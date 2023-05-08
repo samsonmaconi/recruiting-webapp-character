@@ -3,24 +3,30 @@ import PropTypes from 'prop-types'
 import './CharacterCard.css';
 import AttributesCard from '../AttributesCard/AttributesCard';
 import CharacterClassListCard from '../CharacterClassListCard/CharacterClassListCard';
-import { ATTRIBUTE_LIST, DEFAULT_ATTRIBUTE_VALUE } from '../../consts';
+import { ATTRIBUTE_LIST, DEFAULT_ATTRIBUTE_VALUE, DEFAULT_SKILL_VALUE, SKILL_LIST } from '../../consts';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCharacterAttributes } from '../../redux/slices/characterCardsSlice';
+import { updateCharacterAttributes, updateCharacterSkills } from '../../redux/slices/characterCardsSlice';
+import SkillsCard from '../SkillsCard/SkillsCard';
 
 const CharacterCard = props => {
   const characterAttributes = useSelector(state => state.characterCards.characterAttributes);
+  const characterSkills = useSelector(state => state.characterCards.characterSkills);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!characterAttributes) {
-      initState()
+      initState();
     }
   }, [])
 
   const initState = () => {
     const initAttributes = {}
-    ATTRIBUTE_LIST.forEach(attribute => initAttributes[attribute] = DEFAULT_ATTRIBUTE_VALUE)
-    dispatch(updateCharacterAttributes(initAttributes))
+    ATTRIBUTE_LIST.forEach(attribute => initAttributes[attribute] = DEFAULT_ATTRIBUTE_VALUE);
+    dispatch(updateCharacterAttributes(initAttributes));
+    
+    const initSkills = {}
+    SKILL_LIST.forEach(skill => initSkills[skill.name] = {...skill, value: DEFAULT_SKILL_VALUE});
+    dispatch(updateCharacterSkills(initSkills));
   }
 
   return (
@@ -28,6 +34,7 @@ const CharacterCard = props => {
       {characterAttributes && <>
         <AttributesCard attributes={characterAttributes} />
         <CharacterClassListCard attributes={characterAttributes} />
+        <SkillsCard attributes={characterAttributes} skills={characterSkills} />
       </>}
     </div>
   )
